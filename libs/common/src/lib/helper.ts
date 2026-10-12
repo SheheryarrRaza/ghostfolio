@@ -785,11 +785,11 @@ export function parseSymbol({ dataSource, symbol }: AssetProfileIdentifier) {
 }
 
 export function resetHours(aDate: Date) {
-  const year = getYear(aDate);
-  const month = getMonth(aDate);
-  const day = getDate(aDate);
+  const fullYear = getYear(aDate);
+  const monthIndex = getMonth(aDate);
+  const dayOfMonth = getDate(aDate);
 
-  return new Date(Date.UTC(year, month, day));
+  return new Date(Date.UTC(fullYear, monthIndex, dayOfMonth));
 }
 
 export function resolveFearAndGreedIndex(aValue?: number) {
