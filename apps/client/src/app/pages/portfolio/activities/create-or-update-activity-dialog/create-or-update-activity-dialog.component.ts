@@ -7,6 +7,7 @@ import {
 } from '@ghostfolio/common/config';
 import { CreateOrderDto, UpdateOrderDto } from '@ghostfolio/common/dtos';
 import {
+  extractNumberFromString,
   getDateFormatString,
   getStringOrNull
 } from '@ghostfolio/common/helper';
@@ -473,6 +474,24 @@ export class GfCreateOrUpdateActivityDialogComponent {
       currencyOfUnitPrice: this.activityForm.get('currency')?.value,
       unitPrice: this.currentMarketPrice
     });
+  }
+
+  protected onUnitPricePaste(event: ClipboardEvent) {
+    const pastedText = event.clipboardData?.getData('text');
+
+    if (!pastedText) {
+      return;
+    }
+
+    const parsedValue = extractNumberFromString({
+      locale: this.locale,
+      value: pastedText
+    });
+
+    if (Number.isFinite(parsedValue)) {
+      event.preventDefault();
+      this.activityForm.get('unitPrice')?.setValue(parsedValue);
+    }
   }
 
   protected dateFilter(aDate: Date) {
