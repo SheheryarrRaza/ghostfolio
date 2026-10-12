@@ -1,6 +1,9 @@
 import { PrismaService } from '@ghostfolio/api/services/prisma/prisma.service';
 import { UNKNOWN_KEY } from '@ghostfolio/common/config';
-import { applyAssetProfileOverrides } from '@ghostfolio/common/helper';
+import {
+  applyAssetProfileOverrides,
+  getAssetProfileIdentifier
+} from '@ghostfolio/common/helper';
 import {
   AssetProfileIdentifier,
   EnhancedAssetProfile,
@@ -83,6 +86,25 @@ export class SymbolProfileService {
         isActive: true
       }
     });
+  }
+
+  public async getActivityCountsByAssetProfile({
+    assetProfileIdentifiers,
+    userId
+  }: {
+    assetProfileIdentifiers: AssetProfileIdentifier[];
+    userId: string;
+  }) {
+    const activityCounts: { [assetProfileIdentifier: string]: number } = {};
+
+    for (const { dataSource, symbol } of assetProfileIdentifiers) {
+      activityCounts[getAssetProfileIdentifier({ dataSource, symbol })] =
+        await this.prismaService.order.count({
+          where: { userId, SymbolProfile: { dataSource, symbol } }
+        });
+    }
+
+    return activityCounts;
   }
 
   public getAssetProfileUpdateInput(
