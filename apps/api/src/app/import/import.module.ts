@@ -18,11 +18,12 @@ import { TagModule } from '@ghostfolio/api/services/tag/tag.module';
 
 import { Module } from '@nestjs/common';
 
+import { ImportFileController } from './import-file.controller';
 import { ImportController } from './import.controller';
 import { ImportService } from './import.service';
 
 @Module({
-  controllers: [ImportController],
+  controllers: [ImportController, ImportFileController],
   exports: [ImportService],
   imports: [
     AccountModule,

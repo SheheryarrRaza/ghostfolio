@@ -17,6 +17,7 @@ import {
   Get,
   HttpException,
   Post,
+  Query,
   Req,
   Res,
   UseGuards,
@@ -55,6 +56,18 @@ export class AuthController {
         StatusCodes.FORBIDDEN
       );
     }
+  }
+
+  @Get('signout')
+  @Version(VERSION_NEUTRAL)
+  public signOut(
+    @Query('returnUrl') returnUrl: string,
+    @Res() response: Response
+  ) {
+    response.clearCookie('export-feed-token');
+    response.redirect(
+      returnUrl ?? `${this.configurationService.get('ROOT_URL')}`
+    );
   }
 
   @Get('google')
