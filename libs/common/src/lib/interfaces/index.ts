@@ -7,7 +7,7 @@ import type { AdminJobs } from './admin-jobs.interface';
 import type { AdminMarketDataDetails } from './admin-market-data-details.interface';
 import type { AdminUser } from './admin-user.interface';
 import type { AssetClassSelectorOption } from './asset-class-selector-option.interface';
-import type { AssetProfileIdentifier } from './asset-profile-identifier.interface';
+import type { AssetIdentifier } from './asset-identifier.interface';
 import type { AssetProfileItem } from './asset-profile-item.interface';
 import type { BenchmarkProperty } from './benchmark-property.interface';
 import type { Benchmark } from './benchmark.interface';
@@ -123,7 +123,7 @@ export {
   ApiKeyResponse,
   AssertionCredentialJSON,
   AssetClassSelectorOption,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   AssetProfileItem,
   AssetProfileResponse,
   AssetProfilesResponse,

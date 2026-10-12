@@ -3,11 +3,7 @@ import {
   getCssVariable,
   isDarkColorScheme
 } from '@ghostfolio/common/helper';
-import {
-  AssetProfileIdentifier,
-  InfoItem,
-  User
-} from '@ghostfolio/common/interfaces';
+import { AssetIdentifier, InfoItem, User } from '@ghostfolio/common/interfaces';
 import { hasPermission, permissions } from '@ghostfolio/common/permissions';
 import { internalRoutes, publicRoutes } from '@ghostfolio/common/routes/routes';
 import { ColorScheme } from '@ghostfolio/common/types';
@@ -278,10 +274,7 @@ export class GfAppComponent implements OnInit {
       });
   }
 
-  private openHoldingDetailDialog({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  private openHoldingDetailDialog({ dataSource, symbol }: AssetIdentifier) {
     this.userService
       .get()
       .pipe(takeUntilDestroyed(this.destroyRef))

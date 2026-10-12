@@ -1,8 +1,8 @@
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 export class AssetProfileChangedEvent {
   public constructor(
-    public readonly data: AssetProfileIdentifier & { currency: string }
+    public readonly data: AssetIdentifier & { currency: string }
   ) {}
 
   public static getName(): string {

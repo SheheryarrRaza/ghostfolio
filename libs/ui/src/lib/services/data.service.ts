@@ -28,7 +28,7 @@ import {
   ActivityResponse,
   AiPromptResponse,
   ApiKeyResponse,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   AssetProfileResponse,
   AssetProfilesResponse,
   AssetResponse,
@@ -299,7 +299,7 @@ export class DataService {
     );
   }
 
-  public fetchDividendsImport({ dataSource, symbol }: AssetProfileIdentifier) {
+  public fetchDividendsImport({ dataSource, symbol }: AssetIdentifier) {
     return this.http.get<ImportResponse>(
       `/api/v1/import/dividends/${dataSource}/${encodeURIComponent(symbol)}`
     );
@@ -355,7 +355,7 @@ export class DataService {
     return this.http.delete<Order>(`/api/v1/activities/${aId}`);
   }
 
-  public deleteBenchmark({ dataSource, symbol }: AssetProfileIdentifier) {
+  public deleteBenchmark({ dataSource, symbol }: AssetIdentifier) {
     return this.http.delete<Partial<SymbolProfile>>(
       `/api/v1/benchmarks/${dataSource}/${encodeURIComponent(symbol)}`
     );
@@ -373,7 +373,7 @@ export class DataService {
     return this.http.delete<UserModel>(`/api/v1/user/${aId}`);
   }
 
-  public deleteWatchlistItem({ dataSource, symbol }: AssetProfileIdentifier) {
+  public deleteWatchlistItem({ dataSource, symbol }: AssetIdentifier) {
     return this.http.delete<void>(
       `/api/v1/watchlist/${dataSource}/${encodeURIComponent(symbol)}`
     );
@@ -386,7 +386,7 @@ export class DataService {
   public fetchAsset({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Observable<AssetResponse> {
+  }: AssetIdentifier): Observable<AssetResponse> {
     return this.http
       .get<any>(`/api/v1/asset/${dataSource}/${encodeURIComponent(symbol)}`)
       .pipe(
@@ -447,7 +447,7 @@ export class DataService {
     range: DateRange;
     startDate: Date;
     withExcludedAccounts?: boolean;
-  } & AssetProfileIdentifier) {
+  } & AssetIdentifier) {
     let params = this.buildFiltersAsQueryParams({ filters });
 
     params = params.append('range', range);
@@ -520,7 +520,7 @@ export class DataService {
   public fetchHoldingDetail({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Observable<
+  }: AssetIdentifier): Observable<
     Omit<PortfolioHoldingResponse, 'dateOfFirstActivity'> & {
       dateOfFirstActivity: Date | undefined;
     }
@@ -578,7 +578,7 @@ export class DataService {
   public fetchMarketDataBySymbol({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Observable<AssetProfileResponse> {
+  }: AssetIdentifier): Observable<AssetProfileResponse> {
     return this.http
       .get<any>(
         `/api/v1/asset-profiles/${dataSource}/${encodeURIComponent(symbol)}`
@@ -881,7 +881,7 @@ export class DataService {
     return this.http.post<ApiKeyResponse>('/api/v1/api-keys', {});
   }
 
-  public postBenchmark(benchmark: AssetProfileIdentifier) {
+  public postBenchmark(benchmark: AssetIdentifier) {
     return this.http.post('/api/v1/benchmarks', benchmark);
   }
 
@@ -889,7 +889,7 @@ export class DataService {
     dataSource,
     marketData,
     symbol
-  }: { marketData: UpdateBulkMarketDataDto } & AssetProfileIdentifier) {
+  }: { marketData: UpdateBulkMarketDataDto } & AssetIdentifier) {
     const url = `/api/v1/market-data/${dataSource}/${encodeURIComponent(symbol)}`;
 
     return this.http.post<MarketData>(url, marketData);
@@ -927,7 +927,7 @@ export class DataService {
     dataSource,
     symbol,
     tags
-  }: { tags: Tag[] } & AssetProfileIdentifier) {
+  }: { tags: Tag[] } & AssetIdentifier) {
     return this.http.put<void>(
       `/api/v1/portfolio/holding/${dataSource}/${encodeURIComponent(symbol)}/tags`,
       { tags }

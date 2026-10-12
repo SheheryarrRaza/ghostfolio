@@ -9,7 +9,7 @@ import {
   getLocale
 } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   PortfolioPosition
 } from '@ghostfolio/common/interfaces';
 import { ColorScheme, DateRange } from '@ghostfolio/common/types';
@@ -66,7 +66,7 @@ export class GfTreemapChartComponent
   public readonly holdings = input<PortfolioPosition[]>();
   public readonly locale = input<string>(getLocale());
 
-  public readonly treemapChartClicked = output<AssetProfileIdentifier>();
+  public readonly treemapChartClicked = output<AssetIdentifier>();
 
   protected isLoading = true;
 

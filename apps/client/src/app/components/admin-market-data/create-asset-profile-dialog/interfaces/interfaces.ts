@@ -1,4 +1,4 @@
-import type { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import type { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import type { FormControl, FormGroup } from '@angular/forms';
 
@@ -12,5 +12,5 @@ export type CreateAssetProfileDialogMode = 'auto' | 'currency' | 'manual';
 export type CreateAssetProfileForm = FormGroup<{
   addCurrency: FormControl<string | null>;
   addSymbol: FormControl<string | null>;
-  searchSymbol: FormControl<AssetProfileIdentifier | null>;
+  searchSymbol: FormControl<AssetIdentifier | null>;
 }>;

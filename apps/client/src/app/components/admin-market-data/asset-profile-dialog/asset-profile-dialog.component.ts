@@ -22,7 +22,7 @@ import {
 import {
   AdminMarketDataDetails,
   AssetClassSelectorOption,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   LineChartItem,
   ScraperConfiguration,
   User
@@ -200,7 +200,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
   protected readonly assetProfileIdentifierForm = this.formBuilder.group(
     {
       assetProfileIdentifier: new FormControl<
-        AssetProfileIdentifier | { dataSource: null; symbol: null }
+        AssetIdentifier | { dataSource: null; symbol: null }
       >({ dataSource: null, symbol: null }, [Validators.required])
     },
     {
@@ -324,7 +324,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
     private destroyRef: DestroyRef,
     private dialogRef: MatDialogRef<
       GfAssetProfileDialogComponent,
-      AssetProfileIdentifier
+      AssetIdentifier
     >,
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
@@ -535,10 +535,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
     });
   }
 
-  protected onDeleteProfileData({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  protected onDeleteProfileData({ dataSource, symbol }: AssetIdentifier) {
     this.adminMarketDataService
       .deleteAssetProfile({ dataSource, symbol })
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -550,7 +547,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
   protected onGatherProfileDataBySymbol({
     dataSource,
     symbol
-  }: AssetProfileIdentifier) {
+  }: AssetIdentifier) {
     this.adminService
       .gatherProfileDataBySymbol({ dataSource, symbol })
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -563,7 +560,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
     symbol
   }: {
     range?: DateRange;
-  } & AssetProfileIdentifier) {
+  } & AssetIdentifier) {
     this.adminService
       .gatherSymbol({ dataSource, range, symbol })
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -615,7 +612,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
     }
   }
 
-  protected onSetBenchmark({ dataSource, symbol }: AssetProfileIdentifier) {
+  protected onSetBenchmark({ dataSource, symbol }: AssetIdentifier) {
     this.dataService
       .postBenchmark({ dataSource, symbol })
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -876,7 +873,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
     }
   }
 
-  protected onUnsetBenchmark({ dataSource, symbol }: AssetProfileIdentifier) {
+  protected onUnsetBenchmark({ dataSource, symbol }: AssetIdentifier) {
     this.dataService
       .deleteBenchmark({ dataSource, symbol })
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -896,7 +893,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
   }
 
   private isNewSymbolValid(control: AbstractControl): ValidationErrors | null {
-    const currentAssetProfileIdentifier: AssetProfileIdentifier | undefined =
+    const currentAssetProfileIdentifier: AssetIdentifier | undefined =
       control.get('assetProfileIdentifier')?.value;
 
     if (
@@ -911,7 +908,7 @@ export class GfAssetProfileDialogComponent implements OnInit {
     return null;
   }
 
-  private mergeAssetProfile({ dataSource, symbol }: AssetProfileIdentifier) {
+  private mergeAssetProfile({ dataSource, symbol }: AssetIdentifier) {
     if (
       !canMergeAssetProfile({
         isBenchmark: this.isBenchmark,

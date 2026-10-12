@@ -16,7 +16,7 @@ import {
   parseDate
 } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   HistoricalDataItem
 } from '@ghostfolio/common/interfaces';
 import { PortfolioSnapshot } from '@ghostfolio/common/models';
@@ -306,7 +306,7 @@ export class RoaiPortfolioCalculator extends PortfolioCalculator {
       [date: string]: { [assetProfileIdentifier: string]: Big };
     };
     start: Date;
-  } & AssetProfileIdentifier): HoldingPerformance {
+  } & AssetIdentifier): HoldingPerformance {
     const averageInvestmentValues: { [date: string]: Big } = {};
 
     const averageInvestmentValuesWithCurrencyEffect: {

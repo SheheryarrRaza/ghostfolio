@@ -3,11 +3,7 @@ import { ImpersonationStorageService } from '@ghostfolio/client/services/imperso
 import { UserService } from '@ghostfolio/client/services/user/user.service';
 import { DEFAULT_PAGE_SIZE } from '@ghostfolio/common/config';
 import { downloadAsFile } from '@ghostfolio/common/helper';
-import {
-  Activity,
-  AssetProfileIdentifier,
-  User
-} from '@ghostfolio/common/interfaces';
+import { Activity, AssetIdentifier, User } from '@ghostfolio/common/interfaces';
 import { hasPermission, permissions } from '@ghostfolio/common/permissions';
 import { internalRoutes } from '@ghostfolio/common/routes/routes';
 import { hasScope, scopes } from '@ghostfolio/common/scopes';
@@ -120,7 +116,7 @@ export class GfActivitiesPageComponent implements OnInit {
     this.fetchActivities();
   }
 
-  protected onClickActivity({ dataSource, symbol }: AssetProfileIdentifier) {
+  protected onClickActivity({ dataSource, symbol }: AssetIdentifier) {
     this.router.navigate([], {
       queryParams: {
         dataSource,

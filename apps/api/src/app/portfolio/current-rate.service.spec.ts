@@ -3,7 +3,7 @@ import { DataProviderService } from '@ghostfolio/api/services/data-provider/data
 import { MarketDataService } from '@ghostfolio/api/services/market-data/market-data.service';
 import { PropertyService } from '@ghostfolio/api/services/property/property.service';
 import { resetHours } from '@ghostfolio/common/helper';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import {
   DataSource,
@@ -40,7 +40,7 @@ jest.mock('@ghostfolio/api/services/market-data/market-data.service', () => {
           assetProfileIdentifiers,
           dateQuery
         }: {
-          assetProfileIdentifiers: AssetProfileIdentifier[];
+          assetProfileIdentifiers: AssetIdentifier[];
           dateQuery: DateQuery;
           skip?: number;
           take?: number;
@@ -69,7 +69,7 @@ jest.mock('@ghostfolio/api/services/market-data/market-data.service', () => {
           ]);
         },
         getRangeCount: ({}: {
-          assetProfileIdentifiers: AssetProfileIdentifier[];
+          assetProfileIdentifiers: AssetIdentifier[];
           dateRangeEnd: Date;
           dateRangeStart: Date;
         }) => {
@@ -177,7 +177,7 @@ describe('CurrentRateService', () => {
     const today = resetHours(new Date());
     const yesterday = subDays(today, 1);
 
-    const dataGatheringItems: AssetProfileIdentifier[] = [
+    const dataGatheringItems: AssetIdentifier[] = [
       { dataSource: DataSource.YAHOO, symbol: 'AMZN' }
     ];
 

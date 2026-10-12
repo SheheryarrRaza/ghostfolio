@@ -10,7 +10,7 @@ import {
 } from '@ghostfolio/common/config';
 import { isCashPosition } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   LineChartItem,
   PortfolioPerformance,
   PortfolioPosition,
@@ -54,7 +54,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class GfHomeOverviewComponent implements OnInit {
   protected readonly DEFAULT_LOCALE = DEFAULT_LOCALE;
-  protected readonly errors = signal<AssetProfileIdentifier[]>([]);
+  protected readonly errors = signal<AssetIdentifier[]>([]);
   protected readonly hasImpersonationId = signal(false);
   protected readonly historicalDataItems = signal<LineChartItem[] | null>(null);
   protected readonly holdings = signal<PortfolioPosition[] | undefined>(
@@ -145,7 +145,7 @@ export class GfHomeOverviewComponent implements OnInit {
       });
   }
 
-  protected onHoldingClicked({ dataSource, symbol }: AssetProfileIdentifier) {
+  protected onHoldingClicked({ dataSource, symbol }: AssetIdentifier) {
     if (dataSource && symbol) {
       this.router.navigate([], {
         queryParams: { dataSource, symbol, holdingDetailDialog: true }

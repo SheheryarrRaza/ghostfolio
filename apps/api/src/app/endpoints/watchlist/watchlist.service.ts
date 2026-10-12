@@ -7,7 +7,7 @@ import { DataGatheringService } from '@ghostfolio/api/services/queues/data-gathe
 import { SymbolProfileService } from '@ghostfolio/api/services/symbol-profile/symbol-profile.service';
 import { getAssetProfileIdentifier } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   WatchlistResponse
 } from '@ghostfolio/common/interfaces';
 
@@ -29,7 +29,7 @@ export class WatchlistService {
     dataSource,
     symbol,
     userId
-  }: { userId: string } & AssetProfileIdentifier): Promise<void> {
+  }: { userId: string } & AssetIdentifier): Promise<void> {
     const symbolProfile = await this.prismaService.symbolProfile.findUnique({
       where: {
         dataSource_symbol: { dataSource, symbol }
@@ -76,7 +76,7 @@ export class WatchlistService {
     dataSource,
     symbol,
     userId
-  }: { userId: string } & AssetProfileIdentifier) {
+  }: { userId: string } & AssetIdentifier) {
     await this.prismaService.user.update({
       data: {
         watchlist: {
@@ -162,7 +162,7 @@ export class WatchlistService {
     dataSource,
     symbol,
     userId
-  }: { userId: string } & AssetProfileIdentifier): Promise<boolean> {
+  }: { userId: string } & AssetIdentifier): Promise<boolean> {
     const assetProfile = await this.prismaService.symbolProfile.findFirst({
       where: {
         dataSource,

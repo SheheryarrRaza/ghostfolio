@@ -52,7 +52,7 @@ import {
 import {
   AccountsResponse,
   Activity,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   EnhancedAssetProfile,
   Filter,
   HistoricalDataItem,
@@ -908,7 +908,7 @@ export class PortfolioService {
   }: {
     userId: string;
     withExcludedActivities?: boolean;
-  } & AssetProfileIdentifier): Promise<PortfolioHoldingResponse> {
+  } & AssetIdentifier): Promise<PortfolioHoldingResponse> {
     const user = await this.userService.user({ id: userId });
     const userCurrency = this.getUserCurrency(user);
 
@@ -1618,7 +1618,7 @@ export class PortfolioService {
   }: {
     tags: Tag[];
     userId: string;
-  } & AssetProfileIdentifier) {
+  } & AssetIdentifier) {
     await this.activitiesService.assignTags({
       dataSource,
       symbol,
@@ -2543,7 +2543,7 @@ export class PortfolioService {
       return !quantity.eq(0);
     });
 
-    const assetProfileIdentifiers: AssetProfileIdentifier[] = openHoldings.map(
+    const assetProfileIdentifiers: AssetIdentifier[] = openHoldings.map(
       ({
         latestActivity: {
           assetProfile: { dataSource, symbol }

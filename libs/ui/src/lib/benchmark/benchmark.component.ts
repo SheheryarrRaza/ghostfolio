@@ -5,7 +5,7 @@ import {
   resolveMarketCondition
 } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   Benchmark,
   User
 } from '@ghostfolio/common/interfaces';
@@ -71,7 +71,7 @@ export class GfBenchmarkComponent {
   public readonly showSymbol = input(true);
   public readonly user = input<User>();
 
-  public readonly itemDeleted = output<AssetProfileIdentifier>();
+  public readonly itemDeleted = output<AssetIdentifier>();
 
   protected readonly sort = viewChild(MatSort);
 
@@ -138,7 +138,7 @@ export class GfBenchmarkComponent {
     addIcons({ ellipsisHorizontal, trashOutline });
   }
 
-  protected onDeleteItem({ dataSource, symbol }: AssetProfileIdentifier) {
+  protected onDeleteItem({ dataSource, symbol }: AssetIdentifier) {
     this.notificationService.confirm({
       confirmFn: () => {
         this.itemDeleted.emit({ dataSource, symbol });
@@ -148,19 +148,13 @@ export class GfBenchmarkComponent {
     });
   }
 
-  protected onOpenBenchmarkDialog({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  protected onOpenBenchmarkDialog({ dataSource, symbol }: AssetIdentifier) {
     this.router.navigate([], {
       queryParams: { dataSource, symbol, benchmarkDetailDialog: true }
     });
   }
 
-  private openBenchmarkDetailDialog({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  private openBenchmarkDetailDialog({ dataSource, symbol }: AssetIdentifier) {
     const dialogRef = this.dialog.open<
       GfBenchmarkDetailDialogComponent,
       BenchmarkDetailDialogParams

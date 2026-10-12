@@ -36,7 +36,7 @@ import {
 } from '@ghostfolio/common/helper';
 import {
   Activity,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   DataProviderInfo,
   Filter,
   HistoricalDataItem,
@@ -265,7 +265,7 @@ export abstract class PortfolioCalculator {
       };
     }
 
-    const assetProfileIdentifiersWithQuotes: AssetProfileIdentifier[] = [];
+    const assetProfileIdentifiersWithQuotes: AssetIdentifier[] = [];
     const cashAssetProfileIdentifiers = new Set<string>();
     const currencies: { [assetProfileIdentifier: string]: string } = {};
     const dataGatheringItems: DataGatheringItem[] = [];
@@ -964,7 +964,7 @@ export abstract class PortfolioCalculator {
       [date: string]: { [assetProfileIdentifier: string]: Big };
     };
     start: Date;
-  } & AssetProfileIdentifier): HoldingPerformance;
+  } & AssetIdentifier): HoldingPerformance;
 
   protected getHoldingValuation({
     activities,

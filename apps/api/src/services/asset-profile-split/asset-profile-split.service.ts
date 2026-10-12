@@ -1,6 +1,6 @@
 import { PrismaService } from '@ghostfolio/api/services/prisma/prisma.service';
 import { resetHours } from '@ghostfolio/common/helper';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import { Injectable } from '@nestjs/common';
 import { AssetProfileSplit } from '@prisma/client';
@@ -36,7 +36,7 @@ export class AssetProfileSplitService {
   public async getSplits({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Promise<AssetProfileSplit[]> {
+  }: AssetIdentifier): Promise<AssetProfileSplit[]> {
     return this.prismaService.assetProfileSplit.findMany({
       orderBy: [
         {

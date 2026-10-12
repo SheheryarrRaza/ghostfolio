@@ -17,7 +17,7 @@ import {
 } from '@ghostfolio/common/helper';
 import {
   AdminMarketDataDetails,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   AssetProfileItem,
   AssetProfilesResponse,
   DataProviderInfo,
@@ -60,7 +60,7 @@ export class AssetProfilesService {
     denominator: number;
     numerator: number;
     symbolProfileId: string;
-  } & AssetProfileIdentifier) {
+  } & AssetIdentifier) {
     const assetProfileSplit = await this.assetProfileSplitService.upsert({
       date,
       denominator,
@@ -85,7 +85,7 @@ export class AssetProfilesService {
   }: {
     id: string;
     symbolProfileId: string;
-  } & AssetProfileIdentifier) {
+  } & AssetIdentifier) {
     const isDeleted = await this.assetProfileSplitService.deleteById({
       id,
       symbolProfileId
@@ -123,7 +123,7 @@ export class AssetProfilesService {
     force?: boolean;
     symbolProfileId: string;
     withImmediateInvalidation?: boolean;
-  } & AssetProfileIdentifier) {
+  } & AssetIdentifier) {
     if (withImmediateInvalidation) {
       await this.emitPortfolioChangedEvents(symbolProfileId);
     }
@@ -153,7 +153,7 @@ export class AssetProfilesService {
   public async getAssetProfile({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Promise<AdminMarketDataDetails> {
+  }: AssetIdentifier): Promise<AdminMarketDataDetails> {
     let activitiesCount: EnhancedAssetProfile['activitiesCount'] = 0;
     let currency: EnhancedAssetProfile['currency'] = '-';
     let dateOfFirstActivity: EnhancedAssetProfile['dateOfFirstActivity'];
@@ -464,7 +464,7 @@ export class AssetProfilesService {
   }
 
   public async updateAssetProfileData(
-    { dataSource, symbol }: AssetProfileIdentifier,
+    { dataSource, symbol }: AssetIdentifier,
     assetProfileData: UpdateAssetProfileDataDto
   ): Promise<EnhancedAssetProfile> {
     const notFoundMessage = `Could not find the asset profile for ${symbol} (${dataSource})`;

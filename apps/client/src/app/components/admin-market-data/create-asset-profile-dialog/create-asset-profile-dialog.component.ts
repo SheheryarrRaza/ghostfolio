@@ -3,7 +3,7 @@ import {
   ghostfolioPrefix,
   PROPERTY_CURRENCIES
 } from '@ghostfolio/common/config';
-import type { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import type { AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { DataSource } from '@ghostfolio/prisma/enums';
 import { AdminService, DataService } from '@ghostfolio/ui/services';
 import { GfSymbolAutocompleteComponent } from '@ghostfolio/ui/symbol-autocomplete';
@@ -93,7 +93,7 @@ export class GfCreateAssetProfileDialogComponent implements OnInit {
           this.iso4217CurrencyCodeValidator()
         ]),
         addSymbol: new FormControl<string | null>(null, [Validators.required]),
-        searchSymbol: new FormControl<AssetProfileIdentifier | null>(null, [
+        searchSymbol: new FormControl<AssetIdentifier | null>(null, [
           Validators.required
         ])
       },

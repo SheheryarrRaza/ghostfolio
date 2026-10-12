@@ -1,6 +1,6 @@
 import { canOpenHoldingDetail, getLocale } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   HoldingWithParents,
   PortfolioPosition
 } from '@ghostfolio/common/interfaces';
@@ -44,7 +44,7 @@ export class GfTopHoldingsComponent implements OnChanges {
   @Input() public pageSize = Number.MAX_SAFE_INTEGER;
   @Input() public topHoldings?: HoldingWithParents[];
 
-  @Output() holdingClicked = new EventEmitter<AssetProfileIdentifier>();
+  @Output() holdingClicked = new EventEmitter<AssetIdentifier>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

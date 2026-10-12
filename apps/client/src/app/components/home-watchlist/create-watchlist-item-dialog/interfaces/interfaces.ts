@@ -1,4 +1,4 @@
-import type { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import type { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import type { FormControl, FormGroup } from '@angular/forms';
 
@@ -8,5 +8,5 @@ export interface CreateWatchlistItemDialogParams {
 }
 
 export type CreateWatchlistItemForm = FormGroup<{
-  searchSymbol: FormControl<AssetProfileIdentifier | null>;
+  searchSymbol: FormControl<AssetIdentifier | null>;
 }>;

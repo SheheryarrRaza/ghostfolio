@@ -24,7 +24,7 @@ import {
   getStartOfUtcDateOfYesterday
 } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   BenchmarkProperty
 } from '@ghostfolio/common/interfaces';
 
@@ -72,7 +72,7 @@ export class DataGatheringService {
   }
 
   public async gatherAssetProfiles(
-    aAssetProfileIdentifiers?: AssetProfileIdentifier[]
+    aAssetProfileIdentifiers?: AssetIdentifier[]
   ) {
     let assetProfileIdentifiers = aAssetProfileIdentifiers?.filter(
       (dataGatheringItem) => {
@@ -322,7 +322,7 @@ export class DataGatheringService {
     dataSource,
     date,
     symbol
-  }: { date: Date } & AssetProfileIdentifier) {
+  }: { date: Date } & AssetIdentifier) {
     const startOfUtcDate = getStartOfUtcDate(date);
 
     try {
@@ -409,7 +409,7 @@ export class DataGatheringService {
     maxAge
   }: {
     maxAge?: StringValue;
-  } = {}): Promise<AssetProfileIdentifier[]> {
+  } = {}): Promise<AssetIdentifier[]> {
     return this.prismaService.symbolProfile.findMany({
       orderBy: [{ symbol: 'asc' }, { dataSource: 'asc' }],
       select: {
@@ -436,7 +436,7 @@ export class DataGatheringService {
   public async removeAssetProfileJobFromQueue({
     dataSource,
     symbol
-  }: AssetProfileIdentifier) {
+  }: AssetIdentifier) {
     const job = await this.dataGatheringQueue.getJob(
       `${getAssetProfileIdentifier({ dataSource, symbol })}:${dataSource}`
     );
@@ -445,7 +445,7 @@ export class DataGatheringService {
   }
 
   private async getAssetProfileIdentifiersWithRecentMarketData(): Promise<
-    AssetProfileIdentifier[]
+    AssetIdentifier[]
   > {
     return (
       await this.prismaService.marketData.groupBy({
@@ -466,7 +466,7 @@ export class DataGatheringService {
   private getCurrencies7D({
     assetProfileIdentifiersWithRecentMarketData
   }: {
-    assetProfileIdentifiersWithRecentMarketData: AssetProfileIdentifier[];
+    assetProfileIdentifiersWithRecentMarketData: AssetIdentifier[];
   }): DataGatheringItem[] {
     return this.exchangeRateDataService
       .getCurrencyPairs()
@@ -488,9 +488,7 @@ export class DataGatheringService {
     return min([aStartDate, subYears(new Date(), 10)]);
   }
 
-  private async getHourlyAssetProfileIdentifiers(): Promise<
-    AssetProfileIdentifier[]
-  > {
+  private async getHourlyAssetProfileIdentifiers(): Promise<AssetIdentifier[]> {
     const symbolProfiles = await this.prismaService.symbolProfile.findMany({
       orderBy: [{ symbol: 'asc' }, { dataSource: 'asc' }],
       select: {
@@ -517,7 +515,7 @@ export class DataGatheringService {
     assetProfileIdentifiersWithRecentMarketData,
     withUserSubscription = false
   }: {
-    assetProfileIdentifiersWithRecentMarketData: AssetProfileIdentifier[];
+    assetProfileIdentifiersWithRecentMarketData: AssetIdentifier[];
     withUserSubscription?: boolean;
   }): Promise<DataGatheringItem[]> {
     const symbolProfiles =

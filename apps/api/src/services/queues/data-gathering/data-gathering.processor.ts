@@ -15,7 +15,7 @@ import {
   getAssetProfileIdentifier,
   getStartOfUtcDate
 } from '@ghostfolio/common/helper';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import { utc } from '@date-fns/utc';
 import { Process, Processor } from '@nestjs/bull';
@@ -46,7 +46,7 @@ export class DataGatheringProcessor {
     ),
     name: GATHER_ASSET_PROFILE_PROCESS_JOB_NAME
   })
-  public async gatherAssetProfile(job: Job<AssetProfileIdentifier>) {
+  public async gatherAssetProfile(job: Job<AssetIdentifier>) {
     const { dataSource, symbol } = job.data;
 
     try {

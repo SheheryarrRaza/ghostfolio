@@ -1,4 +1,4 @@
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { AccountWithValue, DateRange } from '@ghostfolio/common/types';
 
 import { SearchMode } from '../enums/search-mode';
@@ -11,7 +11,7 @@ export interface AccountSearchResultItem extends Pick<
   routerLink: string[];
 }
 
-export interface AssetSearchResultItem extends AssetProfileIdentifier {
+export interface AssetSearchResultItem extends AssetIdentifier {
   assetSubClassString: string;
   currency: string;
   mode: SearchMode.ASSET_PROFILE | SearchMode.HOLDING;
@@ -30,9 +30,7 @@ export interface QuickLinkSearchResultItem {
 }
 
 export type SearchResultItem =
-  | AccountSearchResultItem
-  | AssetSearchResultItem
-  | QuickLinkSearchResultItem;
+  AccountSearchResultItem | AssetSearchResultItem | QuickLinkSearchResultItem;
 
 export interface SearchResults {
   accounts: SearchResultItem[];

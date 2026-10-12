@@ -1,4 +1,4 @@
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import { Service } from '@angular/core';
 
@@ -10,7 +10,7 @@ export class EntityLogoImageSourceService {
   public getLogoUrlByAssetProfileIdentifier({
     dataSource,
     symbol
-  }: AssetProfileIdentifier) {
+  }: AssetIdentifier) {
     return `../api/v1/logo/${dataSource}/${symbol}`;
   }
 

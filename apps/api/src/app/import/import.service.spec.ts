@@ -8,10 +8,7 @@ import { TagService } from '@ghostfolio/api/services/tag/tag.service';
 import { NON_INVESTMENT_ACTIVITY_TYPES } from '@ghostfolio/common/config';
 import { CreateOrderDto } from '@ghostfolio/common/dtos';
 import { getAssetProfileIdentifier } from '@ghostfolio/common/helper';
-import {
-  Activity,
-  AssetProfileIdentifier
-} from '@ghostfolio/common/interfaces';
+import { Activity, AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { UserWithSettings } from '@ghostfolio/common/types';
 
 import { DataSource, SymbolProfile } from '@prisma/client';
@@ -326,7 +323,7 @@ describe('ImportService', () => {
     });
   }
 
-  function mockCreatedAssetProfiles(assetProfiles: AssetProfileIdentifier[]) {
+  function mockCreatedAssetProfiles(assetProfiles: AssetIdentifier[]) {
     for (const assetProfile of assetProfiles) {
       createActivity.mockImplementationOnce(
         ({

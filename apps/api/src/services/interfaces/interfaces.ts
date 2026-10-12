@@ -1,6 +1,6 @@
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
-export interface DataGatheringItem extends AssetProfileIdentifier {
+export interface DataGatheringItem extends AssetIdentifier {
   date?: Date;
   force?: boolean;
 }

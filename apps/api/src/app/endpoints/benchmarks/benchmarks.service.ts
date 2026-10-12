@@ -5,7 +5,7 @@ import { ExchangeRateDataService } from '@ghostfolio/api/services/exchange-rate-
 import { MarketDataService } from '@ghostfolio/api/services/market-data/market-data.service';
 import { DATE_FORMAT, parseDate, resetHours } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   BenchmarkMarketDataDetailsResponse,
   Filter,
   UserSettings
@@ -46,7 +46,7 @@ export class BenchmarksService {
     userId: string;
     userSettings: UserSettings;
     withExcludedAccounts?: boolean;
-  } & AssetProfileIdentifier): Promise<BenchmarkMarketDataDetailsResponse> {
+  } & AssetIdentifier): Promise<BenchmarkMarketDataDetailsResponse> {
     const marketData: { date: string; value: number }[] = [];
     const userCurrency = userSettings.baseCurrency;
 

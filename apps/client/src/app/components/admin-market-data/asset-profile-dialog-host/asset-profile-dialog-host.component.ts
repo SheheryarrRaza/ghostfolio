@@ -1,6 +1,6 @@
 import { UserService } from '@ghostfolio/client/services/user/user.service';
 import { DEFAULT_LOCALE } from '@ghostfolio/common/config';
-import { AssetProfileIdentifier, User } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier, User } from '@ghostfolio/common/interfaces';
 import { internalRoutes } from '@ghostfolio/common/routes/routes';
 import { DataSource } from '@ghostfolio/prisma/enums';
 import { AdminService } from '@ghostfolio/ui/services';
@@ -124,7 +124,7 @@ export class GfAssetProfileDialogHostComponent implements OnDestroy, OnInit {
   private navigateToAssetProfileDialog({
     dataSource,
     symbol
-  }: AssetProfileIdentifier) {
+  }: AssetIdentifier) {
     void this.router.navigate(
       internalRoutes.adminControl.subRoutes.marketData.subRoutes.update.routerLink(
         dataSource,
@@ -137,11 +137,11 @@ export class GfAssetProfileDialogHostComponent implements OnDestroy, OnInit {
     dataSource,
     symbol,
     user
-  }: AssetProfileIdentifier & { user: User }) {
+  }: AssetIdentifier & { user: User }) {
     const dialogRef = this.dialog.open<
       GfAssetProfileDialogComponent,
       AssetProfileDialogParams,
-      AssetProfileIdentifier
+      AssetIdentifier
     >(GfAssetProfileDialogComponent, {
       autoFocus: false,
       data: {
@@ -175,7 +175,7 @@ export class GfAssetProfileDialogHostComponent implements OnDestroy, OnInit {
     const dialogRef = this.dialog.open<
       GfCreateAssetProfileDialogComponent,
       CreateAssetProfileDialogParams,
-      AssetProfileIdentifier & { addAssetProfile: boolean }
+      AssetIdentifier & { addAssetProfile: boolean }
     >(GfCreateAssetProfileDialogComponent, {
       autoFocus: false,
       data: {

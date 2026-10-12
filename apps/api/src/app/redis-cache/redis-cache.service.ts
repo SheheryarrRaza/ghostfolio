@@ -1,6 +1,6 @@
 import { ConfigurationService } from '@ghostfolio/api/services/configuration/configuration.service';
 import { getAssetProfileIdentifier } from '@ghostfolio/common/helper';
-import { AssetProfileIdentifier, Filter } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier, Filter } from '@ghostfolio/common/interfaces';
 import { PerformanceCalculationType } from '@ghostfolio/common/types/performance-calculation-type.type';
 
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
@@ -74,7 +74,7 @@ export class RedisCacheService {
     return portfolioSnapshotKey;
   }
 
-  public getQuoteKey({ dataSource, symbol }: AssetProfileIdentifier) {
+  public getQuoteKey({ dataSource, symbol }: AssetIdentifier) {
     return `quote-${getAssetProfileIdentifier({ dataSource, symbol })}`;
   }
 

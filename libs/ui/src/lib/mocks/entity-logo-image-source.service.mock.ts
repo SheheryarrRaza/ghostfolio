@@ -1,5 +1,5 @@
 import { getAssetProfileIdentifier } from '@ghostfolio/common/helper';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { DataSource } from '@ghostfolio/prisma/enums';
 
 // Resolves like a logo of an unknown entity, but fails to load
@@ -9,7 +9,7 @@ export class EntityLogoImageSourceServiceMock {
   public getLogoUrlByAssetProfileIdentifier({
     dataSource,
     symbol
-  }: AssetProfileIdentifier) {
+  }: AssetIdentifier) {
     switch (getAssetProfileIdentifier({ dataSource, symbol })) {
       case getAssetProfileIdentifier({
         dataSource: DataSource.YAHOO,

@@ -28,7 +28,7 @@ import {
   isValidSearchQuery
 } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   DataProviderHistoricalResponse,
   DataProviderResponse,
   LookupItem,
@@ -94,7 +94,7 @@ export class DataProviderService implements OnModuleInit {
     return false;
   }
 
-  public async getAssetProfiles(items: AssetProfileIdentifier[]): Promise<{
+  public async getAssetProfiles(items: AssetIdentifier[]): Promise<{
     [assetProfileIdentifier: string]: Partial<SymbolProfile>;
   }> {
     const response: {
@@ -353,7 +353,7 @@ export class DataProviderService implements OnModuleInit {
     from: Date;
     granularity: Granularity;
     to: Date;
-  } & AssetProfileIdentifier): Promise<{
+  } & AssetIdentifier): Promise<{
     [date: string]: DataProviderHistoricalResponse;
   }> {
     if (!isValid(from) || !isValid(to)) {
@@ -370,7 +370,7 @@ export class DataProviderService implements OnModuleInit {
   }
 
   public async getHistorical(
-    aItems: AssetProfileIdentifier[],
+    aItems: AssetIdentifier[],
     aGranularity: Granularity = 'month',
     from: Date,
     to: Date
@@ -454,7 +454,7 @@ export class DataProviderService implements OnModuleInit {
     from,
     to
   }: {
-    assetProfileIdentifiers: AssetProfileIdentifier[];
+    assetProfileIdentifiers: AssetIdentifier[];
     from: Date;
     to: Date;
   }): Promise<{
@@ -597,7 +597,7 @@ export class DataProviderService implements OnModuleInit {
     subscriptionType,
     useCache = true
   }: {
-    items: AssetProfileIdentifier[];
+    items: AssetIdentifier[];
     requestTimeout?: number;
     subscriptionType?: SubscriptionType;
     useCache?: boolean;
@@ -631,7 +631,7 @@ export class DataProviderService implements OnModuleInit {
     }
 
     // Get items from cache
-    const itemsToFetch: AssetProfileIdentifier[] = [];
+    const itemsToFetch: AssetIdentifier[] = [];
 
     for (const { dataSource, symbol } of items) {
       if (useCache) {
@@ -945,7 +945,7 @@ export class DataProviderService implements OnModuleInit {
     assetProfileIdentifiers,
     currency
   }: {
-    assetProfileIdentifiers: AssetProfileIdentifier[];
+    assetProfileIdentifiers: AssetIdentifier[];
     currency: string;
   }) {
     return assetProfileIdentifiers.some(({ dataSource, symbol }) => {

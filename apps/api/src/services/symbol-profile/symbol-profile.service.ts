@@ -2,7 +2,7 @@ import { PrismaService } from '@ghostfolio/api/services/prisma/prisma.service';
 import { UNKNOWN_KEY } from '@ghostfolio/common/config';
 import { applyAssetProfileOverrides } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   EnhancedAssetProfile,
   Holding,
   ScraperConfiguration
@@ -29,16 +29,13 @@ export class SymbolProfileService {
     return this.prismaService.symbolProfile.create({ data: assetProfile });
   }
 
-  public async delete({ dataSource, symbol }: AssetProfileIdentifier) {
+  public async delete({ dataSource, symbol }: AssetIdentifier) {
     return this.prismaService.symbolProfile.delete({
       where: { dataSource_symbol: { dataSource, symbol } }
     });
   }
 
-  public deleteAssetProfileOverrides({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  public deleteAssetProfileOverrides({ dataSource, symbol }: AssetIdentifier) {
     return this.prismaService.assetProfileOverrides.deleteMany({
       where: { symbolProfile: { dataSource, symbol } }
     });
@@ -86,7 +83,7 @@ export class SymbolProfileService {
   }
 
   public getAssetProfileUpdateInput(
-    { dataSource }: AssetProfileIdentifier,
+    { dataSource }: AssetIdentifier,
     data: Prisma.SymbolProfileUpdateInput
   ): Prisma.SymbolProfileUpdateInput {
     if (dataSource === DataSource.MANUAL) {
@@ -127,7 +124,7 @@ export class SymbolProfileService {
   }
 
   public async getSymbolProfiles(
-    aAssetProfileIdentifiers: AssetProfileIdentifier[]
+    aAssetProfileIdentifiers: AssetIdentifier[]
   ): Promise<EnhancedAssetProfile[]> {
     return this.prismaService.symbolProfile
       .findMany({
@@ -183,8 +180,8 @@ export class SymbolProfileService {
   }
 
   public updateAssetProfileIdentifier(
-    oldAssetProfileIdentifier: AssetProfileIdentifier,
-    newAssetProfileIdentifier: AssetProfileIdentifier
+    oldAssetProfileIdentifier: AssetIdentifier,
+    newAssetProfileIdentifier: AssetIdentifier
   ) {
     return this.prismaService.symbolProfile.update({
       data: {
@@ -201,7 +198,7 @@ export class SymbolProfileService {
   }
 
   public updateSymbolProfile(
-    { dataSource, symbol }: AssetProfileIdentifier,
+    { dataSource, symbol }: AssetIdentifier,
     {
       assetClass,
       assetProfileOverrides,

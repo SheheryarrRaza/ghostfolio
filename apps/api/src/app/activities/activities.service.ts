@@ -42,7 +42,7 @@ import {
 import {
   ActivitiesResponse,
   Activity,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   EnhancedAssetProfile,
   Filter
 } from '@ghostfolio/common/interfaces';
@@ -122,7 +122,7 @@ export class ActivitiesService {
     symbol,
     tags,
     userId
-  }: { tags: Tag[]; userId: string } & AssetProfileIdentifier) {
+  }: { tags: Tag[]; userId: string } & AssetIdentifier) {
     await this.tagService.validateTagIdsWithoutDraftTag({
       userId,
       tagIds: tags.map(({ id }) => {
@@ -583,7 +583,7 @@ export class ActivitiesService {
     dataSource,
     symbol,
     types
-  }: AssetProfileIdentifier & { types: ActivityType[] }) {
+  }: AssetIdentifier & { types: ActivityType[] }) {
     return this.prismaService.order.findFirst({
       orderBy: [{ date: 'desc' }, { createdAt: 'desc' }],
       where: {
