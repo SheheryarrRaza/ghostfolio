@@ -343,6 +343,33 @@ export class GhostfolioService {
     });
   }
 
+  public async refundDailyRequests({
+    count = 1,
+    userId
+  }: {
+    count?: number;
+    userId: string;
+  }) {
+    const analytics = await this.prismaService.analytics.findUnique({
+      select: { dataProviderGhostfolioDailyRequests: true },
+      where: { userId }
+    });
+
+    if (!analytics) {
+      return;
+    }
+
+    await this.prismaService.analytics.update({
+      data: {
+        dataProviderGhostfolioDailyRequests: Math.max(
+          0,
+          analytics.dataProviderGhostfolioDailyRequests - count
+        )
+      },
+      where: { userId }
+    });
+  }
+
   public async isDailyRequestLimitExceeded({
     user
   }: {

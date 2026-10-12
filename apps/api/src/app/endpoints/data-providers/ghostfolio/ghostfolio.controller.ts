@@ -159,6 +159,12 @@ export class GhostfolioController {
         userId: this.request.user.id
       });
 
+      if (result.items.length === 0) {
+        await this.ghostfolioService.refundDailyRequests({
+          userId: this.request.user.id
+        });
+      }
+
       return result;
     } catch {
       throw new HttpException(
