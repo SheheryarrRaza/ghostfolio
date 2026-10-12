@@ -12,11 +12,12 @@ import { TagModule } from '@ghostfolio/api/services/tag/tag.module';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
+import { UserQuickSettingsController } from './user-quick-settings.controller';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
 @Module({
-  controllers: [UserController],
+  controllers: [UserController, UserQuickSettingsController],
   exports: [UserService],
   imports: [
     ActivitiesModule,

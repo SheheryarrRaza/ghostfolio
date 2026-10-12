@@ -11,11 +11,12 @@ import { TagModule } from '@ghostfolio/api/services/tag/tag.module';
 
 import { Module } from '@nestjs/common';
 
+import { AccountLookupController } from './account-lookup.controller';
 import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
 
 @Module({
-  controllers: [AccountController],
+  controllers: [AccountController, AccountLookupController],
   exports: [AccountService],
   imports: [
     AccountBalanceModule,
