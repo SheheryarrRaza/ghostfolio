@@ -118,6 +118,24 @@ export class TagService {
     });
   }
 
+  public async mergeTags({
+    sourceTagId,
+    targetTagId,
+    userId
+  }: {
+    sourceTagId: string;
+    targetTagId: string;
+    userId: string;
+  }): Promise<Tag> {
+    await this.validateTagIds({ userId, tagIds: [sourceTagId, targetTagId] });
+
+    this.moveActivities({ sourceTagId, targetTagId, userId });
+
+    return this.prismaService.tag.delete({
+      where: { id: sourceTagId, userId }
+    });
+  }
+
   public async updateTag({
     data,
     where
@@ -187,6 +205,33 @@ export class TagService {
     }
 
     return this.validateTagIds({ tagIds, userId });
+  }
+
+  private async moveActivities({
+    sourceTagId,
+    targetTagId,
+    userId
+  }: {
+    sourceTagId: string;
+    targetTagId: string;
+    userId: string;
+  }) {
+    const activities = await this.prismaService.order.findMany({
+      select: { id: true },
+      where: { userId, tags: { some: { id: sourceTagId } } }
+    });
+
+    for (const { id } of activities) {
+      await this.prismaService.order.update({
+        data: {
+          tags: {
+            connect: { id: targetTagId },
+            disconnect: { id: sourceTagId }
+          }
+        },
+        where: { id }
+      });
+    }
   }
 
   private getExceptionForError(error: unknown) {
