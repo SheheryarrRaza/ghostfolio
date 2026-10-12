@@ -191,7 +191,12 @@
               }
             }
           </mat-label>
-          <input formControlName="unitPrice" matInput type="number" />
+          <input
+            formControlName="unitPrice"
+            matInput
+            type="number"
+            (paste)="onUnitPricePaste($event)"
+          />
           <div
             class="ml-2"
             matTextSuffix
