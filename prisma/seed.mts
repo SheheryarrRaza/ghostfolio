@@ -25,6 +25,14 @@ async function main() {
     ],
     skipDuplicates: true
   });
+
+  const symbol = process.env.SEED_SYMBOL;
+
+  if (symbol) {
+    await prisma.$executeRawUnsafe(
+      `DELETE FROM "Order" WHERE "symbolProfileId" IN (SELECT "id" FROM "SymbolProfile" WHERE "symbol" = '${symbol}')`
+    );
+  }
 }
 
 main()
