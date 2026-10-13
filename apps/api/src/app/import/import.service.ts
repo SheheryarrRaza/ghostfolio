@@ -33,7 +33,7 @@ import {
 import {
   Activity,
   ActivityError,
-  AssetProfileIdentifier
+  AssetIdentifier
 } from '@ghostfolio/common/interfaces';
 import { hasPermission, permissions } from '@ghostfolio/common/permissions';
 import {
@@ -76,7 +76,7 @@ export class ImportService {
     symbol,
     userCurrency,
     userId
-  }: AssetProfileIdentifier & {
+  }: AssetIdentifier & {
     userCurrency: string;
     userId: string;
   }): Promise<Activity[]> {
@@ -293,7 +293,7 @@ export class ImportService {
 
     // Resolve the symbols with an ISIN to the symbol of the data provider
     // before the asset profiles are created and the duplicates are detected
-    const assetProfileIdentifiersWithIsin: AssetProfileIdentifier[] = uniqBy(
+    const assetProfileIdentifiersWithIsin: AssetIdentifier[] = uniqBy(
       [...(assetProfilesWithMarketDataDto ?? []), ...activitiesDto]
         .filter(({ dataSource, symbol }) => {
           return dataSource !== DataSource.MANUAL && isISIN(symbol);

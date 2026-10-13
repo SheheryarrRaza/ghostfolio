@@ -13,7 +13,7 @@ import {
   getAssetProfileIdentifier
 } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   Benchmark,
   BenchmarkProperty,
   BenchmarkResponse
@@ -51,10 +51,7 @@ export class BenchmarkService {
     return 0;
   }
 
-  public async getBenchmarkTrends({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  public async getBenchmarkTrends({ dataSource, symbol }: AssetIdentifier) {
     const historicalData = await this.marketDataService.marketDataItems({
       orderBy: {
         date: 'desc'
@@ -145,7 +142,7 @@ export class BenchmarkService {
   public async addBenchmark({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Promise<Partial<SymbolProfile> | null> {
+  }: AssetIdentifier): Promise<Partial<SymbolProfile> | null> {
     const assetProfile = await this.prismaService.symbolProfile.findFirst({
       where: {
         dataSource,
@@ -174,7 +171,7 @@ export class BenchmarkService {
   public async deleteBenchmark({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Promise<Partial<SymbolProfile> | null> {
+  }: AssetIdentifier): Promise<Partial<SymbolProfile> | null> {
     const assetProfile = await this.prismaService.symbolProfile.findFirst({
       where: {
         dataSource,

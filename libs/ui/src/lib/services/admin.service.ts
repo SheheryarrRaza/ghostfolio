@@ -15,7 +15,7 @@ import {
   AdminJobs,
   AdminUserResponse,
   AdminUsersResponse,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   DataProviderGhostfolioStatusResponse,
   DataProviderHistoricalResponse,
   EnhancedAssetProfile
@@ -38,7 +38,7 @@ export class AdminService {
   private readonly environment = inject(GF_ENVIRONMENT);
   private readonly http = inject(HttpClient);
 
-  public addAssetProfile({ dataSource, symbol }: AssetProfileIdentifier) {
+  public addAssetProfile({ dataSource, symbol }: AssetIdentifier) {
     return this.http.post<void>(
       `/api/v1/admin/profile-data/${dataSource}/${encodeURIComponent(symbol)}`,
       null
@@ -69,13 +69,13 @@ export class AdminService {
     dataSource,
     id,
     symbol
-  }: AssetProfileIdentifier & { id: string }) {
+  }: AssetIdentifier & { id: string }) {
     return this.http.delete<void>(
       `/api/v1/asset-profiles/${dataSource}/${encodeURIComponent(symbol)}/splits/${id}`
     );
   }
 
-  public deleteProfileData({ dataSource, symbol }: AssetProfileIdentifier) {
+  public deleteProfileData({ dataSource, symbol }: AssetIdentifier) {
     return this.http.delete<void>(
       `/api/v1/admin/profile-data/${dataSource}/${encodeURIComponent(symbol)}`
     );
@@ -149,10 +149,7 @@ export class AdminService {
     return this.http.post<void>('/api/v1/admin/gather/profile-data', {});
   }
 
-  public gatherProfileDataBySymbol({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  public gatherProfileDataBySymbol({ dataSource, symbol }: AssetIdentifier) {
     return this.http.post<void>(
       `/api/v1/admin/gather/profile-data/${dataSource}/${encodeURIComponent(symbol)}`,
       {}
@@ -169,7 +166,7 @@ export class AdminService {
     symbol
   }: {
     range?: DateRange;
-  } & AssetProfileIdentifier) {
+  } & AssetIdentifier) {
     let params = new HttpParams();
 
     if (range) {
@@ -185,14 +182,14 @@ export class AdminService {
     dataSource,
     dateString,
     symbol
-  }: { dateString: string } & AssetProfileIdentifier) {
+  }: { dateString: string } & AssetIdentifier) {
     const url = `/api/v1/symbol/${dataSource}/${encodeURIComponent(symbol)}/${dateString}`;
 
     return this.http.get<DataProviderHistoricalResponse>(url);
   }
 
   public mergeAssetProfile(
-    { dataSource, symbol }: AssetProfileIdentifier,
+    { dataSource, symbol }: AssetIdentifier,
     targetAssetProfile: MergeAssetProfileDto
   ) {
     return this.http.post<EnhancedAssetProfile>(
@@ -202,7 +199,7 @@ export class AdminService {
   }
 
   public patchAssetProfile(
-    { dataSource, symbol }: AssetProfileIdentifier,
+    { dataSource, symbol }: AssetIdentifier,
     {
       assetClass,
       assetSubClass,
@@ -245,7 +242,7 @@ export class AdminService {
     dataSource,
     split,
     symbol
-  }: AssetProfileIdentifier & { split: CreateAssetProfileSplitDto }) {
+  }: AssetIdentifier & { split: CreateAssetProfileSplitDto }) {
     return this.http.post<AssetProfileSplit>(
       `/api/v1/asset-profiles/${dataSource}/${encodeURIComponent(symbol)}/splits`,
       split
@@ -271,7 +268,7 @@ export class AdminService {
     dataSource,
     scraperConfiguration,
     symbol
-  }: AssetProfileIdentifier & UpdateAssetProfileDto['scraperConfiguration']) {
+  }: AssetIdentifier & UpdateAssetProfileDto['scraperConfiguration']) {
     return this.http.post<{ price: number }>(
       `/api/v1/admin/market-data/${dataSource}/${encodeURIComponent(symbol)}/test`,
       {

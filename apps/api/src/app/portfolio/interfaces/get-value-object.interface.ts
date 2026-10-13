@@ -1,6 +1,6 @@
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
-export interface GetValueObject extends AssetProfileIdentifier {
+export interface GetValueObject extends AssetIdentifier {
   date: Date;
   marketPrice: number;
 }

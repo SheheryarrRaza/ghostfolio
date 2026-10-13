@@ -18,7 +18,7 @@ import {
 import { parseDate } from '@ghostfolio/common/helper';
 import {
   Activity,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   Filter,
   PortfolioSummary
 } from '@ghostfolio/common/interfaces';
@@ -411,7 +411,7 @@ describe('PortfolioService', () => {
         portfolioService as unknown as {
           getCashSymbolProfiles: (
             aCashDetails: CashDetails
-          ) => AssetProfileIdentifier[];
+          ) => AssetIdentifier[];
         }
       ).getCashSymbolProfiles(cashDetails);
 

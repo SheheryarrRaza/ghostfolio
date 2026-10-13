@@ -7,7 +7,7 @@ import type {
 } from '@ghostfolio/prisma/browser';
 
 import { AccountBalance } from '../account-balance.interface';
-import { AssetProfileIdentifier } from '../asset-profile-identifier.interface';
+import { AssetIdentifier } from '../asset-identifier.interface';
 import { MarketData } from '../market-data.interface';
 import { UserSettings } from '../user-settings.interface';
 
@@ -24,7 +24,7 @@ export interface ExportResponse {
     | 'symbolProfileId'
     | 'updatedAt'
     | 'userId'
-  > & { date: string } & AssetProfileIdentifier)[];
+  > & { date: string } & AssetIdentifier)[];
   assetProfiles: (Omit<
     SymbolProfile,
     | 'createdAt'

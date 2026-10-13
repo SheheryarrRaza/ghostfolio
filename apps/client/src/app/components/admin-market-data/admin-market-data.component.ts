@@ -2,7 +2,7 @@ import { UserService } from '@ghostfolio/client/services/user/user.service';
 import { DEFAULT_PAGE_SIZE } from '@ghostfolio/common/config';
 import { canDeleteAssetProfile } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   AssetProfileItem,
   Filter,
   InfoItem,
@@ -260,10 +260,7 @@ export class GfAdminMarketDataComponent implements AfterViewInit, OnInit {
     });
   }
 
-  protected onDeleteAssetProfile({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  protected onDeleteAssetProfile({ dataSource, symbol }: AssetIdentifier) {
     this.adminMarketDataService
       .deleteAssetProfile({ dataSource, symbol })
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -312,10 +309,7 @@ export class GfAdminMarketDataComponent implements AfterViewInit, OnInit {
       });
   }
 
-  protected onOpenAssetProfileDialog({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  protected onOpenAssetProfileDialog({ dataSource, symbol }: AssetIdentifier) {
     void this.router.navigate(
       internalRoutes.adminControl.subRoutes.marketData.subRoutes.update.routerLink(
         dataSource,

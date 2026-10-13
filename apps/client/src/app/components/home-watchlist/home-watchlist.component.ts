@@ -1,7 +1,7 @@
 import { UserService } from '@ghostfolio/client/services/user/user.service';
 import { DEFAULT_LOCALE } from '@ghostfolio/common/config';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   Benchmark,
   User
 } from '@ghostfolio/common/interfaces';
@@ -96,10 +96,7 @@ export class GfHomeWatchlistComponent implements OnInit {
     this.loadWatchlistData();
   }
 
-  protected onWatchlistItemDeleted({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  protected onWatchlistItemDeleted({ dataSource, symbol }: AssetIdentifier) {
     this.dataService
       .deleteWatchlistItem({ dataSource, symbol })
       .pipe(takeUntilDestroyed(this.destroyRef))

@@ -9,7 +9,7 @@ import { ApiService } from '@ghostfolio/api/services/api/api.service';
 import { BenchmarkService } from '@ghostfolio/api/services/benchmark/benchmark.service';
 import { getIntervalFromDateRange } from '@ghostfolio/common/calculation-helper';
 import type {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   BenchmarkMarketDataDetailsResponse,
   BenchmarkResponse
 } from '@ghostfolio/common/interfaces';
@@ -48,9 +48,7 @@ export class BenchmarksController {
   @HasPermission(permissions.accessAdminControl)
   @Post()
   @UseGuards(AuthGuard('jwt'), HasPermissionGuard)
-  public async addBenchmark(
-    @Body() { dataSource, symbol }: AssetProfileIdentifier
-  ) {
+  public async addBenchmark(@Body() { dataSource, symbol }: AssetIdentifier) {
     try {
       const benchmark = await this.benchmarkService.addBenchmark({
         dataSource,

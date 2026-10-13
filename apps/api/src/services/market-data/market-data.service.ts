@@ -3,7 +3,7 @@ import { DataGatheringItem } from '@ghostfolio/api/services/interfaces/interface
 import { PrismaService } from '@ghostfolio/api/services/prisma/prisma.service';
 import { DEFAULT_PROCESSOR_GATHER_HISTORICAL_MARKET_DATA_TIMEOUT } from '@ghostfolio/common/config';
 import { resetHours } from '@ghostfolio/common/helper';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import { Injectable } from '@nestjs/common';
 import {
@@ -17,7 +17,7 @@ import {
 export class MarketDataService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  public async deleteMany({ dataSource, symbol }: AssetProfileIdentifier) {
+  public async deleteMany({ dataSource, symbol }: AssetIdentifier) {
     return this.prismaService.marketData.deleteMany({
       where: {
         dataSource,
@@ -43,7 +43,7 @@ export class MarketDataService {
   public async getLatest({
     dataSource,
     symbol
-  }: AssetProfileIdentifier): Promise<MarketData> {
+  }: AssetIdentifier): Promise<MarketData> {
     return this.prismaService.marketData.findFirst({
       orderBy: [{ date: 'desc' }],
       where: {
@@ -53,7 +53,7 @@ export class MarketDataService {
     });
   }
 
-  public async getMax({ dataSource, symbol }: AssetProfileIdentifier) {
+  public async getMax({ dataSource, symbol }: AssetIdentifier) {
     return this.prismaService.marketData.findFirst({
       select: {
         date: true,
@@ -77,7 +77,7 @@ export class MarketDataService {
     skip,
     take
   }: {
-    assetProfileIdentifiers: AssetProfileIdentifier[];
+    assetProfileIdentifiers: AssetIdentifier[];
     dateQuery: DateQuery;
     skip?: number;
     take?: number;
@@ -109,7 +109,7 @@ export class MarketDataService {
     assetProfileIdentifiers,
     dateQuery
   }: {
-    assetProfileIdentifiers: AssetProfileIdentifier[];
+    assetProfileIdentifiers: AssetIdentifier[];
     dateQuery: DateQuery;
   }): Promise<number> {
     return this.prismaService.marketData.count({
@@ -154,7 +154,7 @@ export class MarketDataService {
     data,
     dataSource,
     symbol
-  }: AssetProfileIdentifier & { data: Prisma.MarketDataUpdateInput[] }) {
+  }: AssetIdentifier & { data: Prisma.MarketDataUpdateInput[] }) {
     await this.prismaService.$transaction(
       async (prisma) => {
         if (data.length > 0) {
@@ -207,8 +207,8 @@ export class MarketDataService {
   }
 
   public updateAssetProfileIdentifier(
-    oldAssetProfileIdentifier: AssetProfileIdentifier,
-    newAssetProfileIdentifier: AssetProfileIdentifier
+    oldAssetProfileIdentifier: AssetIdentifier,
+    newAssetProfileIdentifier: AssetIdentifier
   ) {
     return this.prismaService.marketData.updateMany({
       data: {

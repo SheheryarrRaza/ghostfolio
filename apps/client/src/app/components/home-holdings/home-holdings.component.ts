@@ -1,7 +1,7 @@
 import { UserService } from '@ghostfolio/client/services/user/user.service';
 import { DEFAULT_LOCALE } from '@ghostfolio/common/config';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   PortfolioPosition,
   User
 } from '@ghostfolio/common/interfaces';
@@ -142,7 +142,7 @@ export class GfHomeHoldingsComponent implements OnInit {
     this.initialize();
   }
 
-  protected onHoldingClicked({ dataSource, symbol }: AssetProfileIdentifier) {
+  protected onHoldingClicked({ dataSource, symbol }: AssetIdentifier) {
     if (dataSource && symbol) {
       this.router.navigate([], {
         queryParams: { dataSource, symbol, holdingDetailDialog: true }

@@ -57,7 +57,7 @@ import {
   TAG_IDS_SYSTEM
 } from './config';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   AssetProfileItem,
   Benchmark,
   PortfolioPosition,
@@ -341,7 +341,7 @@ export function getAllActivityTypes(): ActivityType[] {
 export function getAssetProfileIdentifier({
   dataSource,
   symbol
-}: AssetProfileIdentifier) {
+}: AssetIdentifier) {
   return `${dataSource}-${symbol}`;
 }
 
@@ -775,7 +775,7 @@ export function parseDate(date: string): Date | undefined {
   return parseISO(date);
 }
 
-export function parseSymbol({ dataSource, symbol }: AssetProfileIdentifier) {
+export function parseSymbol({ dataSource, symbol }: AssetIdentifier) {
   const [ticker, exchange] = symbol.split('.');
 
   return {

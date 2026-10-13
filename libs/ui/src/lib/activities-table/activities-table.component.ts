@@ -1,10 +1,7 @@
 import { DEFAULT_PAGE_SIZE } from '@ghostfolio/common/config';
 import { ConfirmationDialogType } from '@ghostfolio/common/enums';
 import { getLocale, isDraftActivity } from '@ghostfolio/common/helper';
-import {
-  Activity,
-  AssetProfileIdentifier
-} from '@ghostfolio/common/interfaces';
+import { Activity, AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { internalRoutes } from '@ghostfolio/common/routes/routes';
 import { Type as ActivityType } from '@ghostfolio/prisma/enums';
 import { translate } from '@ghostfolio/ui/i18n';
@@ -125,12 +122,12 @@ export class GfActivitiesTableComponent<
   @Input() public totalItems?: number = Number.MAX_SAFE_INTEGER;
 
   @Output() activitiesDeleted = new EventEmitter<void>();
-  @Output() activityClicked = new EventEmitter<AssetProfileIdentifier>();
+  @Output() activityClicked = new EventEmitter<AssetIdentifier>();
   @Output() activityDeleted = new EventEmitter<string>();
   @Output() export = new EventEmitter<void>();
   @Output() exportDrafts = new EventEmitter<string[]>();
   @Output() import = new EventEmitter<void>();
-  @Output() importDividends = new EventEmitter<AssetProfileIdentifier>();
+  @Output() importDividends = new EventEmitter<AssetIdentifier>();
   @Output() pageChanged = new EventEmitter<PageEvent>();
   @Output() selectedActivities = new EventEmitter<T[]>();
   @Output() sortChanged = new EventEmitter<Sort>();

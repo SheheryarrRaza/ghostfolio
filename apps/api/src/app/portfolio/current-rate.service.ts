@@ -7,7 +7,7 @@ import {
   resetHours
 } from '@ghostfolio/common/helper';
 import {
-  AssetProfileIdentifier,
+  AssetIdentifier,
   DataProviderInfo,
   ResponseError
 } from '@ghostfolio/common/interfaces';
@@ -79,10 +79,11 @@ export class CurrentRateService {
       }
     }
 
-    const assetProfileIdentifiers: AssetProfileIdentifier[] =
-      dataGatheringItems.map(({ dataSource, symbol }) => {
+    const assetProfileIdentifiers: AssetIdentifier[] = dataGatheringItems.map(
+      ({ dataSource, symbol }) => {
         return { dataSource, symbol };
-      });
+      }
+    );
 
     const marketDataCount = await this.marketDataService.getRangeCount({
       assetProfileIdentifiers,

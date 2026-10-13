@@ -1,7 +1,7 @@
 import { PortfolioCalculator } from '@ghostfolio/api/app/portfolio/calculator/portfolio-calculator';
 import { HoldingPerformance } from '@ghostfolio/api/app/portfolio/interfaces/holding-performance.interface';
 import { PerformancePercentages } from '@ghostfolio/api/app/portfolio/types/performance-percentages.type';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { PortfolioSnapshot } from '@ghostfolio/common/models';
 import { PerformanceCalculationType } from '@ghostfolio/common/types/performance-calculation-type.type';
 
@@ -30,7 +30,7 @@ export class RoiPortfolioCalculator extends PortfolioCalculator {
       [date: string]: { [assetProfileIdentifier: string]: Big };
     };
     start: Date;
-  } & AssetProfileIdentifier): HoldingPerformance {
+  } & AssetIdentifier): HoldingPerformance {
     throw new Error('Method not implemented.');
   }
 

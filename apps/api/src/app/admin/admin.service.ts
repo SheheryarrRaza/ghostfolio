@@ -25,7 +25,7 @@ import {
   AdminData,
   AdminUserResponse,
   AdminUsersResponse,
-  AssetProfileIdentifier,
+  AssetIdentifier,
   EnhancedAssetProfile
 } from '@ghostfolio/common/interfaces';
 import { PropertyKey } from '@ghostfolio/common/types';
@@ -71,9 +71,7 @@ export class AdminService {
     currency,
     dataSource,
     symbol
-  }: AssetProfileIdentifier & { currency?: string }): Promise<
-    SymbolProfile | never
-  > {
+  }: AssetIdentifier & { currency?: string }): Promise<SymbolProfile | never> {
     try {
       if (dataSource === 'MANUAL') {
         if (!hasGhostfolioPrefix(symbol)) {
@@ -119,10 +117,7 @@ export class AdminService {
     }
   }
 
-  public async deleteProfileData({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  public async deleteProfileData({ dataSource, symbol }: AssetIdentifier) {
     await this.marketDataService.deleteMany({ dataSource, symbol });
 
     const currency = getCurrencyFromSymbol(symbol);
@@ -253,8 +248,8 @@ export class AdminService {
    * data of the target asset profile is gathered again.
    */
   public async mergeAssetProfile(
-    sourceAssetProfileIdentifier: AssetProfileIdentifier,
-    targetAssetProfileIdentifier: AssetProfileIdentifier
+    sourceAssetProfileIdentifier: AssetIdentifier,
+    targetAssetProfileIdentifier: AssetIdentifier
   ): Promise<EnhancedAssetProfile> {
     if (
       getAssetProfileIdentifier(sourceAssetProfileIdentifier) ===
@@ -469,7 +464,7 @@ export class AdminService {
   }
 
   public async patchAssetProfileData(
-    { dataSource, symbol }: AssetProfileIdentifier,
+    { dataSource, symbol }: AssetIdentifier,
     {
       assetClass,
       assetSubClass,
@@ -500,7 +495,7 @@ export class AdminService {
       newSymbol &&
       (newDataSource !== dataSource || newSymbol !== symbol)
     ) {
-      const newAssetProfileIdentifier: AssetProfileIdentifier = {
+      const newAssetProfileIdentifier: AssetIdentifier = {
         dataSource: newDataSource as DataSource,
         symbol: newSymbol as string
       };

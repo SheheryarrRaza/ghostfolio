@@ -6,7 +6,7 @@ import {
   getLowercase,
   isCashPosition
 } from '@ghostfolio/common/helper';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -62,7 +62,7 @@ export class GfHoldingsTableComponent {
   public readonly mode = input<'default' | 'simple'>('default');
   public readonly pageSize = model(Number.MAX_SAFE_INTEGER);
 
-  public readonly holdingClicked = output<AssetProfileIdentifier>();
+  public readonly holdingClicked = output<AssetIdentifier>();
 
   protected readonly paginator = viewChild.required(MatPaginator);
   protected readonly sort = viewChild.required(MatSort);
@@ -144,10 +144,7 @@ export class GfHoldingsTableComponent {
       : '';
   }
 
-  protected onOpenHoldingDialog({
-    dataSource,
-    symbol
-  }: AssetProfileIdentifier) {
+  protected onOpenHoldingDialog({ dataSource, symbol }: AssetIdentifier) {
     this.holdingClicked.emit({ dataSource, symbol });
   }
 

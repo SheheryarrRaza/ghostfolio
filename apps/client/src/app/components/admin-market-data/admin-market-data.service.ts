@@ -1,5 +1,5 @@
 import { ConfirmationDialogType } from '@ghostfolio/common/enums';
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { NotificationService } from '@ghostfolio/ui/notifications';
 import { AdminService } from '@ghostfolio/ui/services';
 
@@ -17,7 +17,7 @@ export class AdminMarketDataService {
     return this.refreshSubject.asObservable();
   }
 
-  public deleteAssetProfile({ dataSource, symbol }: AssetProfileIdentifier) {
+  public deleteAssetProfile({ dataSource, symbol }: AssetIdentifier) {
     const assetProfileDeleted = new Subject<void>();
 
     this.notificationService.confirm({
@@ -36,9 +36,7 @@ export class AdminMarketDataService {
     return assetProfileDeleted.asObservable();
   }
 
-  public deleteAssetProfiles(
-    aAssetProfileIdentifiers: AssetProfileIdentifier[]
-  ) {
+  public deleteAssetProfiles(aAssetProfileIdentifiers: AssetIdentifier[]) {
     const assetProfileCount = aAssetProfileIdentifiers.length;
     const assetProfilesDeleted = new Subject<void>();
 

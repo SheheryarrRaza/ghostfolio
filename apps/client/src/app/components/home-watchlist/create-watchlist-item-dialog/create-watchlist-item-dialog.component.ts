@@ -1,4 +1,4 @@
-import type { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import type { AssetIdentifier } from '@ghostfolio/common/interfaces';
 import { GfSymbolAutocompleteComponent } from '@ghostfolio/ui/symbol-autocomplete';
 
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
@@ -35,7 +35,7 @@ export class GfCreateWatchlistItemDialogComponent {
   protected readonly createWatchlistItemForm: CreateWatchlistItemForm =
     new FormGroup(
       {
-        searchSymbol: new FormControl<AssetProfileIdentifier | null>(null, [
+        searchSymbol: new FormControl<AssetIdentifier | null>(null, [
           Validators.required
         ])
       },

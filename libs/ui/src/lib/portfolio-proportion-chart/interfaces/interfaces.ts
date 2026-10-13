@@ -1,5 +1,4 @@
-import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
+import { AssetIdentifier } from '@ghostfolio/common/interfaces';
 
 export type PortfolioProportionChartClickEvent =
-  | AssetProfileIdentifier
-  | { accountId: string };
+  AssetIdentifier | { accountId: string };
