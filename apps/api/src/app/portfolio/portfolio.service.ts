@@ -44,6 +44,7 @@ import {
   DATE_FORMAT,
   getAssetProfileIdentifier,
   getSum,
+  hasTag,
   isAccountExcluded,
   isDraftActivity,
   parseDate,
@@ -1913,11 +1914,7 @@ export class PortfolioService {
     // TODO: Use current value of activities instead of holdings
     // tagged with EMERGENCY_FUND_TAG_ID
     const emergencyFundHoldings = holdings.filter(({ tags }) => {
-      return (
-        tags?.some(({ id }) => {
-          return id === TAG_ID_EMERGENCY_FUND;
-        }) ?? false
-      );
+      return hasTag({ tags }, TAG_ID_EMERGENCY_FUND);
     });
 
     let valueInBaseCurrencyOfEmergencyFundHoldings = new Big(0);
@@ -2607,9 +2604,7 @@ export class PortfolioService {
   private isExcludedFromAnalysis(activity: Activity) {
     return (
       isAccountExcluded(activity.account) ||
-      activity.tags?.some(({ id }) => {
-        return id === TAG_ID_EXCLUDE_FROM_ANALYSIS;
-      }) === true
+      hasTag(activity, TAG_ID_EXCLUDE_FROM_ANALYSIS)
     );
   }
 }

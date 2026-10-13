@@ -586,12 +586,19 @@ export function interpolate(template: string, context: any) {
   });
 }
 
-export function isAccountExcluded(account?: { tags?: { id: string }[] }) {
+export function hasTag(
+  entity: { tags?: { id: string }[] } | undefined,
+  tagId: string
+) {
   return (
-    account?.tags?.some(({ id }) => {
-      return id === TAG_ID_EXCLUDE_FROM_ANALYSIS;
+    entity?.tags?.some(({ id }) => {
+      return id === tagId;
     }) === true
   );
+}
+
+export function isAccountExcluded(account?: { tags?: { id: string }[] }) {
+  return hasTag(account, TAG_ID_EXCLUDE_FROM_ANALYSIS);
 }
 
 export function isCashPosition({
@@ -643,11 +650,7 @@ export function isDerivedCurrency(aCurrency: string) {
 }
 
 export function isDraftActivity(activity?: { tags?: { id: string }[] }) {
-  return (
-    activity?.tags?.some(({ id }) => {
-      return id === TAG_ID_DRAFT;
-    }) === true
-  );
+  return hasTag(activity, TAG_ID_DRAFT);
 }
 
 export function isFearAndGreedIndexSymbol(aSymbol: string) {

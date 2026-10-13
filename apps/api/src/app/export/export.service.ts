@@ -3,6 +3,7 @@ import { ActivitiesService } from '@ghostfolio/api/app/activities/activities.ser
 import { environment } from '@ghostfolio/api/environments/environment';
 import { MarketDataService } from '@ghostfolio/api/services/market-data/market-data.service';
 import { TagService } from '@ghostfolio/api/services/tag/tag.service';
+import { hasTag } from '@ghostfolio/common/helper';
 import {
   ExportResponse,
   Filter,
@@ -169,9 +170,7 @@ export class ExportService {
             return tagIds.includes(id);
           }) ||
             activities.some((activity) => {
-              return activity.tags.some(({ id: tagId }) => {
-                return tagId === id;
-              });
+              return hasTag(activity, id);
             }))
         );
       })
