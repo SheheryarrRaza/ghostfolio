@@ -138,7 +138,11 @@ export class BenchmarkService {
         };
       })
       .sort((a, b) => {
-        return (a.name ?? '').localeCompare(b.name ?? '');
+        return (
+          (a.name ?? '').localeCompare(b.name ?? '', undefined, {
+            sensitivity: 'base'
+          }) || a.symbol.localeCompare(b.symbol)
+        );
       });
   }
 
